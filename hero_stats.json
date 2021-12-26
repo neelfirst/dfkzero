@@ -1,0 +1,151 @@
+{
+"Warrior": {
+    "strength": 75,
+    "intelligence": 20,
+    "wisdom": 20,
+    "luck": 35,
+    "agility": 50,
+    "vitality": 65,
+    "endurance": 65,
+    "dexterity": 70
+},
+"Knight": {
+    "strength": 70,
+    "intelligence": 20,
+    "wisdom": 25,
+    "luck": 35,
+    "agility": 45,
+    "vitality": 75,
+    "endurance": 75,
+    "dexterity": 55
+},
+"Thief": {
+    "strength": 55,
+    "intelligence": 25,
+    "wisdom": 35,
+    "luck": 65,
+    "agility": 70,
+    "vitality": 50,
+    "endurance": 40,
+    "dexterity": 55
+},
+"Archer": {
+    "strength": 55,
+    "intelligence": 40,
+    "wisdom": 25,
+    "luck": 40,
+    "agility": 50,
+    "vitality": 50,
+    "endurance": 60,
+    "dexterity": 80
+},
+"Priest": {
+    "strength": 30,
+    "intelligence": 70,
+    "wisdom": 80,
+    "luck": 40,
+    "agility": 40,
+    "vitality": 50,
+    "endurance": 60,
+    "dexterity": 30
+},
+"Wizard": {
+    "strength": 30,
+    "intelligence": 80,
+    "wisdom": 80,
+    "luck": 40,
+    "agility": 40,
+    "vitality": 50,
+    "endurance": 50,
+    "dexterity": 30
+},
+"Monk": {
+    "strength": 60,
+    "intelligence": 25,
+    "wisdom": 50,
+    "luck": 30,
+    "agility": 60,
+    "vitality": 60,
+    "endurance": 55,
+    "dexterity": 60
+},
+"Pirate": {
+    "strength": 70,
+    "intelligence": 20,
+    "wisdom": 20,
+    "luck": 55,
+    "agility": 50,
+    "vitality": 60,
+    "endurance": 55,
+    "dexterity": 70
+},
+"Paladin": {
+    "strength": 80,
+    "intelligence": 30,
+    "wisdom": 65,
+    "luck": 40,
+    "agility": 35,
+    "vitality": 80,
+    "endurance": 80,
+    "dexterity": 40
+},
+"DarkKnight": {
+    "strength": 85,
+    "intelligence": 70,
+    "wisdom": 35,
+    "luck": 35,
+    "agility": 35,
+    "vitality": 75,
+    "endurance": 60,
+    "dexterity": 55
+},
+"Summoner": {
+    "strength": 45,
+    "intelligence": 85,
+    "wisdom": 85,
+    "luck": 40,
+    "agility": 50,
+    "vitality": 50,
+    "endurance": 50,
+    "dexterity": 45
+},
+"Ninja": {
+    "strength": 50,
+    "intelligence": 50,
+    "wisdom": 40,
+    "luck": 60,
+    "agility": 85,
+    "vitality": 50,
+    "endurance": 40,
+    "dexterity": 75
+},
+"Dragoon": {
+    "strength": 80,
+    "intelligence": 50,
+    "wisdom": 60,
+    "luck": 50,
+    "agility": 65,
+    "vitality": 60,
+    "endurance": 70,
+    "dexterity": 65
+},
+"Sage": {
+    "strength": 40,
+    "intelligence": 90,
+    "wisdom": 90,
+    "luck": 55,
+    "agility": 75,
+    "vitality": 60,
+    "endurance": 50,
+    "dexterity": 40
+},
+"DreadKnight": {
+    "strength": 85,
+    "intelligence": 65,
+    "wisdom": 65,
+    "luck": 60,
+    "agility": 60,
+    "vitality": 65,
+    "endurance": 75,
+    "dexterity": 75
+}}

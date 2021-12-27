@@ -114,7 +114,7 @@ def get_children(genes1, genes2):
   results = []
   for c in class_results:
     for p in prof_results:
-      results.append([c, p, gen1_floor(c,p), class_results[c] * prof_results[p]])
+      results.append([c, p, gen1_floor(c,p)-60, class_results[c] * prof_results[p]])
 
   return results
 
@@ -125,8 +125,8 @@ def main(hero1_id, hero2_id):
   hero2_genes = get_genetics(hero2['statGenes'])
   data = get_children(hero1_genes, hero2_genes)
   results = pandas.DataFrame(data, columns = ['mainClass', 'profession', 'value', 'probability'])
-  print(hero1_id, hero2_id, (results['value'] * results['probability']).sum())
 #  print(results[results['probability'] != 0].sort_values('probability', ascending=False))
+  print(hero1_id, hero2_id, (results['value'] * results['probability']).sum())
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Matchmaker. Enter hero ID and desired result')

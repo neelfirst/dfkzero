@@ -69,16 +69,16 @@ def genetic_score(id, statGenes):
 def alignment_score(mainClass, subClass, profession):
   rval = 0
   if profession == "mining":
-    rval = 1.00 * STATS[mainClass]['strength'] + STATS[mainClass]['endurance'] + \
+    rval = 1.00 * ( STATS[mainClass]['strength'] + STATS[mainClass]['endurance'] ) + \
            0.25 * ( STATS[subClass]['strength'] + STATS[subClass]['endurance'] )
   elif profession == "gardening":
-    rval = 1.00 * STATS[mainClass]['wisdom'] + STATS[mainClass]['vitality'] + \
+    rval = 1.00 * ( STATS[mainClass]['wisdom'] + STATS[mainClass]['vitality'] ) + \
            0.25 * ( STATS[subClass]['wisdom'] + STATS[subClass]['vitality'] )
   elif profession == "foraging":
-    rval = 1.00 * STATS[mainClass]['dexterity'] + STATS[mainClass]['intelligence'] + \
+    rval = 1.00 * ( STATS[mainClass]['dexterity'] + STATS[mainClass]['intelligence'] ) + \
            0.25 * ( STATS[subClass]['dexterity'] + STATS[subClass]['intelligence'] )
   elif profession == "fishing":
-    rval = 1.00 * STATS[mainClass]['agility'] + STATS[mainClass]['luck'] + \
+    rval = 1.00 * ( STATS[mainClass]['agility'] + STATS[mainClass]['luck'] ) + \
            0.25 * ( STATS[subClass]['agility'] + STATS[subClass]['luck'] )
   else:
     rval = 0

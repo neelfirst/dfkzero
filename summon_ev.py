@@ -13,23 +13,23 @@ PROFESSIONS = ['mining', 'gardening', 'foraging', 'fishing']
 
 def gen1_floor(c, p):
   if p == 'mining' and (c == 'warrior' or c == 'knight'):
-    return 150
+    return 250
   if p == 'mining' and (c == 'archer' or c == 'thief'):
-    return 100
+    return 200
   if p == 'mining' and (c == 'pirate' or c == 'monk'):
-    return 80
+    return 150
   if p == 'mining' and (c == 'wizard' or c == 'priest'):
-    return 70
-  if p == 'gardening' and (c == 'warrior' or c == 'knight'):
     return 100
+  if p == 'gardening' and (c == 'warrior' or c == 'knight'):
+    return 150
   if p == 'gardening' and (c == 'archer' or c == 'thief'):
     return 100
   if p == 'gardening' and (c == 'pirate' or c == 'monk'):
-    return 75
+    return 100
   if p == 'gardening' and (c == 'wizard' or c == 'priest'):
-    return 150
+    return 200
   if p == 'foraging' and (c == 'warrior' or c == 'knight'):
-    return 75
+    return 100
   if p == 'foraging' and (c == 'archer' or c == 'thief'):
     return 100
   if p == 'foraging' and (c == 'pirate' or c == 'monk'):
@@ -37,14 +37,14 @@ def gen1_floor(c, p):
   if p == 'foraging' and (c == 'wizard' or c == 'priest'):
     return 100
   if p == 'fishing' and (c == 'warrior' or c == 'knight'):
-    return 70
+    return 100
   if p == 'fishing' and (c == 'archer'):
-    return 70
+    return 100
   if p == 'fishing' and (c == 'pirate' or c == 'monk' or c == 'thief'):
     return 100
   if p == 'fishing' and (c == 'wizard' or c == 'priest'):
     return 100
-  return 150 # conservative floor price for advanced classes
+  return 200 # conservative floor price for advanced classes
 
 def get_genetics(statGenes):
   from dfk.hero.utils import utils
@@ -103,8 +103,8 @@ def get_children(genes1, genes2):
   prof_results = get_stuff(genes1['profession'], prof_results)
   prof_results = get_stuff(genes2['profession'], prof_results)
 
-  for k1, v1 in enumerate(genes1):
-    for k2, v2 in enumerate(genes2):
+  for v1 in genes1['mainClass'].values():
+    for v2 in genes2['mainClass'].values():
       adv_class = advanced(v1,v2)
       if adv_class and class_results[adv_class] == 0:
         class_results[adv_class] += 0.25 * (class_results[v1] + class_results[v2])
@@ -114,7 +114,8 @@ def get_children(genes1, genes2):
   results = []
   for c in class_results:
     for p in prof_results:
-      results.append([c, p, gen1_floor(c,p)-60, class_results[c] * prof_results[p]])
+#      results.append([c, p, gen1_floor(c,p)-60, class_results[c] * prof_results[p]])
+      results.append([c, p, class_results[c] * prof_results[p]])
 
   return results
 
@@ -124,9 +125,10 @@ def main(hero1_id, hero2_id):
   hero1_genes = get_genetics(hero1['statGenes'])
   hero2_genes = get_genetics(hero2['statGenes'])
   data = get_children(hero1_genes, hero2_genes)
-  results = pandas.DataFrame(data, columns = ['mainClass', 'profession', 'value', 'probability'])
-#  print(results[results['probability'] != 0].sort_values('probability', ascending=False))
-  print(hero1_id, hero2_id, (results['value'] * results['probability']).sum())
+#  results = pandas.DataFrame(data, columns = ['mainClass', 'profession', 'value', 'probability'])
+  results = pandas.DataFrame(data, columns = ['mainClass', 'profession', 'probability'])
+  print(results[results['probability'] != 0].sort_values('probability', ascending=False))
+#  print(hero1_id, hero2_id, (results['value'] * results['probability']).sum())
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Matchmaker. Enter hero ID and desired result')

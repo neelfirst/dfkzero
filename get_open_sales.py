@@ -20,12 +20,15 @@ def get_it(step=1000, n=7000):
 
 def main():
   df = get_it()
-  tokens = df['tokenId']
-  heroes = tokens[tokens['generation']==1]
-  for h in heroes:
+  heroes = pandas.json_normalize(df['tokenId'])
+  for i in range(len(heroes)):
+    h = heroes.iloc[i]
     genes = get_genetics(h['statGenes'])
     if genes['mainClass']['D'] == genes['mainClass']['R1']:
-
+      if h['summons'] <= 2:
+        if h['rarity'] >= 1:
+          if h['generation'] == 1:
+            print(h['id'])
 
 if __name__ == "__main__":
   main()

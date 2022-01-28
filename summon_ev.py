@@ -125,7 +125,7 @@ def main(hero1_id, hero2_id):
   hero2_genes = get_genetics(hero2['statGenes'])
   data = get_children(hero1_genes, hero2_genes)
   results = pandas.DataFrame(data, columns = ['mainClass', 'profession', 'value', 'probability'])
-#  print(results[results['probability'] != 0].sort_values('probability', ascending=False))
+  print(results[results['probability'] != 0].sort_values('probability', ascending=False))
   print(hero1_id, hero2_id, (results['value'] * results['probability']).sum())
 
 if __name__ == "__main__":

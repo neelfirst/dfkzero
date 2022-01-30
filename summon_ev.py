@@ -2,13 +2,6 @@
 
 import json, pandas, argparse, requests
 
-#URL = 'http://graph3.defikingdoms.com/subgraphs/name/defikingdoms/apiv5/'
-#URL = 'https://graph3.defikingdoms.com/subgraphs/name/defikingdoms/apiv5/'
-#URL = 'http://graph4.defikingdoms.com/subgraphs/name/defikingdoms/apiv5/'
-#URL = 'https://graph4.defikingdoms.com/subgraphs/name/defikingdoms/apiv5/'
-#URL = 'http://graph3.defikingdoms.com/subgraphs/name/defikingdoms/apiv5'
-#URL = 'https://graph3.defikingdoms.com/subgraphs/name/defikingdoms/apiv5'
-#URL = 'http://graph4.defikingdoms.com/subgraphs/name/defikingdoms/apiv5'
 URL = 'https://graph4.defikingdoms.com/subgraphs/name/defikingdoms/apiv5'
 
 HERO_FILE = 'gen_data.txt'
@@ -153,8 +146,8 @@ def query(hero_id):
   return r
 
 def main(hero1_id, hero2_id):
-  hero1 = pandas.DataFrame(query(hero1_id))
-  hero2 = pandas.DataFrame(query(hero2_id))
+  hero1 = pandas.Series(query(hero1_id))
+  hero2 = pandas.Series(query(hero2_id))
   hero1_genes = get_genetics(hero1['statGenes'])
   hero2_genes = get_genetics(hero2['statGenes'])
   data = get_children(hero1_genes, hero2_genes)

@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 
-import json, pandas, argparse
+import json, pandas, argparse, requests
+
+#URL = 'http://graph3.defikingdoms.com/subgraphs/name/defikingdoms/apiv5/'
+#URL = 'https://graph3.defikingdoms.com/subgraphs/name/defikingdoms/apiv5/'
+#URL = 'http://graph4.defikingdoms.com/subgraphs/name/defikingdoms/apiv5/'
+#URL = 'https://graph4.defikingdoms.com/subgraphs/name/defikingdoms/apiv5/'
+#URL = 'http://graph3.defikingdoms.com/subgraphs/name/defikingdoms/apiv5'
+#URL = 'https://graph3.defikingdoms.com/subgraphs/name/defikingdoms/apiv5'
+#URL = 'http://graph4.defikingdoms.com/subgraphs/name/defikingdoms/apiv5'
+URL = 'https://graph4.defikingdoms.com/subgraphs/name/defikingdoms/apiv5'
 
 HERO_FILE = 'gen_data.txt'
 def load_data(FILE):
@@ -89,6 +98,12 @@ def advanced(class1, class2):
     return 'darkKnight'
   if sorted([class1, class2]) == sorted(['priest', 'wizard']):
     return 'summoner'
+  if sorted([class1, class2]) == sorted(['paladin', 'darkKnight']):
+    return 'dragoon'
+  if sorted([class1, class2]) == sorted(['ninja', 'summoner']):
+    return 'sage'
+  if sorted([class1, class2]) == sorted(['dragoon', 'sage']):
+    return 'dreadKnight'
   return None
 
 def get_children(genes1, genes2):
@@ -107,9 +122,14 @@ def get_children(genes1, genes2):
     for v2 in genes2['mainClass'].values():
       adv_class = advanced(v1,v2)
       if adv_class and class_results[adv_class] == 0:
-        class_results[adv_class] += 0.25 * (class_results[v1] + class_results[v2])
-        class_results[v1] *= 0.75
-        class_results[v2] *= 0.75
+        if adv_class == 'dreadKnight':
+          class_results[adv_class] += 0.125 * (class_results[v1] + class_results[v2])
+          class_results[v1] *= 0.875
+          class_results[v2] *= 0.875
+        else:
+          class_results[adv_class] += 0.25 * (class_results[v1] + class_results[v2])
+          class_results[v1] *= 0.75
+          class_results[v2] *= 0.75
 
   results = []
   for c in class_results:
@@ -119,9 +139,22 @@ def get_children(genes1, genes2):
 
   return results
 
+def query(hero_id):
+  QUERY = """query getHeroInfo($ID: ID) {
+    hero(id: $ID) {
+      id
+      generation
+      rarity
+      statGenes
+    }
+  }"""
+  vars = {'ID': hero_id}
+  r = requests.post(URL, json={'query': QUERY, 'variables': vars}).json()['data']['hero']
+  return r
+
 def main(hero1_id, hero2_id):
-  hero1 = HEROES[HEROES['id']==hero1_id]
-  hero2 = HEROES[HEROES['id']==hero2_id]
+  hero1 = pandas.DataFrame(query(hero1_id))
+  hero2 = pandas.DataFrame(query(hero2_id))
   hero1_genes = get_genetics(hero1['statGenes'])
   hero2_genes = get_genetics(hero2['statGenes'])
   data = get_children(hero1_genes, hero2_genes)

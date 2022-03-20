@@ -75,11 +75,11 @@ def get_stuff(d, r):
     if k == 'D':
       r[d[k]] += 0.5 * 0.75
     elif k == 'R1':
-      r[d[k]] += 0.5 * 0.20
+      r[d[k]] += 0.5 * 0.1875
     elif k == 'R2':
-      r[d[k]] += 0.5 * 0.04
+      r[d[k]] += 0.5 * 0.046875
     elif k == 'R3':
-      r[d[k]] += 0.5 * 0.01
+      r[d[k]] += 0.5 * 0.015625
   return r
 
 def advanced(class1, class2):
@@ -116,17 +116,18 @@ def get_children(genes1, genes2):
       adv_class = advanced(v1,v2)
       if adv_class and class_results[adv_class] == 0:
         if adv_class == 'dreadKnight':
-          class_results[adv_class] += 0.125 * (class_results[v1] + class_results[v2])
+          class_results[adv_class] = 0.125 * (class_results[v1] + class_results[v2])
           class_results[v1] *= 0.875
           class_results[v2] *= 0.875
         else:
-          class_results[adv_class] += 0.25 * (class_results[v1] + class_results[v2])
+          class_results[adv_class] = 0.25 * (class_results[v1] + class_results[v2])
           class_results[v1] *= 0.75
           class_results[v2] *= 0.75
 
   results = []
   for c in class_results:
     for p in prof_results:
+      #print(c,p,class_results[c],prof_results[p])
 #      results.append([c, p, gen1_floor(c,p)-60, class_results[c] * prof_results[p]])
       results.append([c, p, class_results[c] * prof_results[p]])
 

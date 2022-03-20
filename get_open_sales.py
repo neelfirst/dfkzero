@@ -25,7 +25,7 @@ def main():
     h = heroes.iloc[i]
     genes = get_genetics(h['statGenes'])
     if genes['mainClass']['D'] == genes['mainClass']['R1']:
-      if h['summons'] <= 2:
+      if h['summons'] <= 0:
         if h['rarity'] >= 1:
           if h['generation'] == 1:
             print(h['id'])
